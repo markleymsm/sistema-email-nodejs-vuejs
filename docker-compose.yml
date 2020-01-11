@@ -1,0 +1,19 @@
+version: "2"
+services: 
+  mongo:
+    image: "mongo:4.2.2"
+    volumes: 
+      - /data/mongodb/db:/data/db
+    ports: 
+      - "27017:27017"
+  node:
+    image: "node:10.18.0"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - "3000:3000"
+    command: "npm start"
