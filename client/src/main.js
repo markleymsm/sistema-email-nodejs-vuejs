@@ -6,6 +6,7 @@ import router from './router'
 import store from './states'
 
 // require('materialize-css')
+import 'materialize-css'
 import 'materialize-css/dist/css/materialize.min.css'
 
 Vue.config.productionTip = false
