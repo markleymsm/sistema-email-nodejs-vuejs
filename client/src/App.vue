@@ -6,8 +6,7 @@
           <div class="user-view">
             <img
               src="http://avatarbox.net/avatars/img37/sandman_avatar_picture_24863.jpg"
-              class="circle"
-            />
+              class="circle">
             <span>Markley</span>
           </div>
         </li>
@@ -41,20 +40,16 @@
     <section id="page">
       <header id="header">
         <ul id="dropdown1" class="dropdown-content">
-          <li>
-            <a href>Temos 2 novos leads</a>
-          </li>
-          <li>
-            <a href>Sua campanha teve novos clicks</a>
-          </li>
+          <li><a href="">Temos 2 novos leads</a></li>
+          <li><a href="">Sua campanha teve novos clicks</a></li>
         </ul>
         <nav class="row ligth-blue">
           <div class="nav-wrapper col s12">
-            <a href class="brand-logo hide-on-med-and-down">Digital Marketing</a>
-            <a href class="brand-logo hide-on-large-only">DM</a>
+            <a href="" class="brand-logo hide-on-med-and-down">Digital Marketing</a>
+            <a href="" class="brand-logo hide-on-large-only">DM</a>
             <ul id="nav-mobile" class="right">
               <li>
-                <a href class="dropdown-button" data-activates="dropdown1">
+                <a href="" class="dropdown-button" data-activates="dropdown1">
                   <i class="material-icons black-text">notifications_active</i>
                 </a>
               </li>
