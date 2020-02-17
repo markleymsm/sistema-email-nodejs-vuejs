@@ -1,7 +1,7 @@
 <template>
   <div>
     <menu type="context" id="menu">
-      <ul class="side-nav">
+      <ul class="sidenav">
         <li>
           <div class="user-view">
             <img
@@ -119,32 +119,32 @@ main {
   font-size: 60px;
 }
 
-#menu .side-nav,
-#menu .side-nav li > a > i.material-icons {
+#menu .sidenav,
+#menu .sidenav li > a > i.material-icons {
   text-align: center;
   color: inherit;
 }
 
-#menu .side-nav li > a > i.material-icons {
+#menu .sidenav li > a > i.material-icons {
   float: none;
   display: inline-block;
   margin: 0;
   font-size: 30px;
 }
 
-#menu .side-nav li > a {
+#menu .sidenav li > a {
   border: 1px solid #424242;
   margin-right: 4px;
   margin-bottom: 4px;
   color: #9e9e9e;
 }
 
-#menu .side-nav li > a:hover {
+#menu .sidenav li > a:hover {
   color: #757575;
   background-color: #000;
 }
 
-#menu .side-nav {
+#menu .sidenav {
   transform: translateX(0);
   width: 150px;
   background-color: #212121;
