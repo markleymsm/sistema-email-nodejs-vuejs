@@ -4,11 +4,13 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let mongoose = require('./src/db/connection');
+let cors = require('cors');
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 
 let app = express();
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

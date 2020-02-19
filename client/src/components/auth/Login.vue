@@ -7,7 +7,7 @@
           <form @submit.prevent="userLogin()">
             <div class="row">
               <div class="input-field col s12">
-                <input id="email" type="email" v-model="login.username" class="validate" />
+                <input id="email" type="email" v-model="login.user_name" class="validate" />
                 <label for="email">Email</label>
               </div>
             </div>
@@ -18,8 +18,7 @@
               </div>
             </div>
             <button class="btn" type="submit">
-              Acessar
-              <i class="material-icons rigth">send</i>
+              Acessar <i class="material-icons rigth">send</i>
             </button>
           </form>
         </div>
@@ -76,10 +75,14 @@ export default {
   },
   methods: {
     userLogin () {
-      console.log('login')
+      this.$store.dispatch('authentication', this.login).then(() => {
+        this.$router.push({path: '/'})
+      })
     },
     userRegister () {
-      console.log('register')
+      this.$store.dispatch('register', this.register).then(() => {
+        this.$router.push({path: '/'})
+      })
     }
   }
 }

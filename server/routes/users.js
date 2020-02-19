@@ -7,9 +7,9 @@ let cfg = require('../config');
 
 router.post('/token', function (req, res, next) {
   let user = req.body;
-
+  console.log('user',user.user_name)
   if (!user.user_name || !user.password) {
-    return res.status(401).send('Unauthorized');
+    return res.status(401).send('Unauthorized111');
   }
 
   let query = { email: user.user_name, password: user.password };
@@ -20,7 +20,7 @@ router.post('/token', function (req, res, next) {
     }
 
     if (!user) {
-      return res.status(401).send('Unauthorized');
+      return res.status(401).send('Unauthorized2222');
     }
 
     let payload = { id: user.id };
@@ -36,13 +36,15 @@ router.post('/token', function (req, res, next) {
 });
 
 router.get('/me', passport.authenticate('jwt', { session: false }), function (req, res, next) {
+  console.log('reqreq',req)
  res.status(200).json({
    user: req.user
  })
  
 });
 
-router.get('/register', function (req, res, next) {
+router.post('/register', function (req, res, next) {
+  
   let data = {
     name: req.body.name,
     email: req.body.email,
@@ -58,7 +60,7 @@ router.get('/register', function (req, res, next) {
     if (err) {
       return res.status(422).json({ err: err });
     }
-    return res, status(200).json({ user: user });
+    return res.status(200).json({ user: user });
 
   };
 
