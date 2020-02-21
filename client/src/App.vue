@@ -1,13 +1,13 @@
 <template>
   <div>
-    <menu type="context" id="menu">
+    <menu type="context" id="menu" v-if="me">
       <ul class="sidenav">
         <li>
           <div class="user-view">
             <img
               src="http://avatarbox.net/avatars/img37/sandman_avatar_picture_24863.jpg"
               class="circle">
-            <span>Markley</span>
+            <span>{{me.user.name}}</span>
           </div>
         </li>
         <li>
@@ -47,7 +47,7 @@
           <div class="nav-wrapper col s12">
             <a href="" class="brand-logo hide-on-med-and-down">Digital Marketing</a>
             <a href="" class="brand-logo hide-on-large-only">DM</a>
-            <ul id="nav-mobile" class="right">
+            <ul id="nav-mobile" class="right" v-if="me">
               <li>
                 <a href="" class="dropdown-button" data-activates="dropdown1">
                   <i class="material-icons black-text">notifications_active</i>
@@ -74,14 +74,12 @@
 </template>
 
 <script>
-import $ from 'jquery'
-
 export default {
   name: 'app',
-  mounted () {
-    $('.dropdown-button').dropdown({
-      belowOrigin: true
-    })
+  computed: {
+    me () {
+      return this.$store.state.user.me
+    }
   }
 }
 </script>

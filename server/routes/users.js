@@ -7,7 +7,7 @@ let cfg = require('../config');
 
 router.post('/token', function (req, res, next) {
   let user = req.body;
-  console.log('user',user.user_name)
+  
   if (!user.user_name || !user.password) {
     return res.status(401).send('Unauthorized111');
   }

@@ -25,7 +25,7 @@ export default {
     },
     authentication (context, user) {
       return window.axios.post('/users/token', qs.stringify(user)).then((response) => {
-        context.commit('updateToken', response.date.token)
+        context.commit('updateToken', response.data.token)
         window.localStorage.setItem('token', response.data.token)
         return response
       })

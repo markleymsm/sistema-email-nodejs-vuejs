@@ -7,8 +7,8 @@
           <form @submit.prevent="userLogin()">
             <div class="row">
               <div class="input-field col s12">
-                <input id="email" type="email" v-model="login.user_name" class="validate" />
-                <label for="email">Email</label>
+                <input id="email-atenticacao" type="email" v-model="login.user_name" class="validate" />
+                <label for="email-atenticacao">Email</label>
               </div>
             </div>
             <div class="row">
