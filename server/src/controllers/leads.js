@@ -1,4 +1,4 @@
-const model = require("../models/list");
+const model = require("../models/lead");
 const GenericController = require("./generic");
 
 const CrudService = require("../services/crud");
