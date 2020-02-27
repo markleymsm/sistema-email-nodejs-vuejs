@@ -11,17 +11,17 @@
           </div>
         </li>
         <li>
-          <a href>
+          <a href="#/">
             <i class="material-icons">home</i>
           </a>
         </li>
         <li>
-          <a href>
+          <a href="#/email">
             <i class="material-icons">email</i>
           </a>
         </li>
         <li>
-          <a href>
+          <a href="/list">
             <i class="material-icons">supervisor_account</i>
           </a>
         </li>
