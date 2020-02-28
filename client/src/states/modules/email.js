@@ -32,8 +32,12 @@ export default {
       })
     },
     update (context, data) {
-      console.log('data', data)
       return window.axios.put('/api/campaigns/' + data._id, qs.stringify(data)).then((response) => {
+        return response
+      })
+    },
+    remove (context, id) {
+      return window.axios.delete('/api/campaigns/' + id).then((response) => {
         return response
       })
     }

@@ -9,7 +9,7 @@ const Lead = mongoose.Schema({
       value: String
     }
   ],
-  lists: [{ title: String, type: ObjectId, ref: "List" }],
+  lists: [{type: ObjectId, ref: "List" }],
   actions: [
     {
       type: ObjectId,

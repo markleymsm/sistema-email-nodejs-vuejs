@@ -4,7 +4,7 @@
       <h5>Editando campanha</h5>
     </div>
     <div class="col s12">
-      <a href="'#/emails/view/' + email._id" class="btn">ver</a>
+      <a :href="'#/emails/view/' + email._id" class="btn">ver</a>
     </div>
     <div class="col s12">
       <div class="card grey lighten-4">

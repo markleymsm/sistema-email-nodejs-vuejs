@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require('./src/db/connection');
 const cors = require('cors');
 const routes = require('./src/routes');
+const validator = require('express-validator');
 
 // let indexRouter = require('./routes/index');
 // let usersRouter = require('./routes/users');
@@ -22,6 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(validator());
+
 
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
