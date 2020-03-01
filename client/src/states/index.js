@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import user from './modules/user'
 import email from './modules/email'
 import list from './modules/list'
+import lead from './modules/lead'
 
 window.axios = require('axios')
 window.axios.defaults.baseURL = process.env.SERVER
@@ -13,7 +14,8 @@ let config = {
   modules: {
     user: user,
     email: email,
-    list: list
+    list: list,
+    lead: lead
   }
 }
 

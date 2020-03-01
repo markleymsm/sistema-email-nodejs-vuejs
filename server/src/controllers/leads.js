@@ -1,15 +1,25 @@
 const model = require("../models/lead");
 const listModel = require("../models/list");
 const GenericController = require("./generic");
+const { check, validationResult } = require("express-validator");
 
 module.exports = function() {
   const controller = new GenericController(model);
 
   controller.subscribe = async function(req, res) {
-    req.checkBody("email", "Enter a valid email").isEmail();
-    req.checkBody("list", "List is required").exists();
+    // req.checkBody("email", "Enter a valid email").isEmail();
+    // req.checkBody("list", "List is required").exists();
 
-    let errors = req.validationErrors();
+    // let errors = req.validationErrors();
+
+    // if (errors) {
+    // return res.status(422).json(errors);
+    // }
+
+    check("email", "Enter a valid email").isEmail();
+    check("list", "List is required").exists();
+
+    errors = validationResult(req);
 
     if (errors) {
       return res.status(422).json(errors);
@@ -64,10 +74,30 @@ module.exports = function() {
       }
     });
 
-
     return res.json({
       status: "success"
     });
+  };
+
+  controller.leadsByList = function(res, req) {
+    model
+      .find({ lists: { $in: [req.params.id] } })
+      .populate("lists")
+      .exec(function(err, leads) {
+        return res.json({ data: leads });
+      });
+  };
+
+  controller.view = function(req, res) {
+    model
+      .findById(req.params.id)
+      .populate("lists")
+      .exec((err, result) => {
+        if (err) {
+          return res.status(404).json(err);
+        }
+        return res.json({ data: result });
+      });
   };
 
   return controller;

@@ -21,7 +21,7 @@
           </a>
         </li>
         <li>
-          <a href="/lists">
+          <a href="#/lists">
             <i class="material-icons">supervisor_account</i>
           </a>
         </li>

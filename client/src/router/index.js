@@ -9,7 +9,10 @@ import EmailNew from '@/components/email/email-new'
 import EmailView from '@/components/email/email-view'
 import EmailEdit from '@/components/email/email-edit'
 import EmailRemove from '@/components/email/email-remove'
+
 import ListsList from '@/components/lists/lists-list'
+import ListsView from '@/components/lists/lists-view'
+import ListsLead from '@/components/lists/lead'
 
 Vue.use(Router)
 
@@ -55,6 +58,18 @@ let router = new Router({
       path: '/lists',
       name: 'ListsList',
       component: ListsList,
+      meta: {requiresAuth: true}
+    },
+    {
+      path: '/lists/:id',
+      name: 'ListsView',
+      component: ListsView,
+      meta: {requiresAuth: true}
+    },
+    {
+      path: '/leads/:id',
+      name: 'ListsLead',
+      component: ListsLead,
       meta: {requiresAuth: true}
     },
     {
