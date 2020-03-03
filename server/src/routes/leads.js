@@ -3,7 +3,7 @@ module.exports = function(app) {
 
   app.post("/leads/subscribe", controller.subscribe);
 
-  app.get("/api/leads-by-list/:id", controller.leadsByList);
+  app.get('/api/leads-by-list/:id', controller.leadsByList);
   app.get("/api/leads", controller.index);
   app.post("/api/leads", controller.add);
   app.get("/api/leads/:id", controller.view);

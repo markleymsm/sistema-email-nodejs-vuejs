@@ -20,9 +20,9 @@ module.exports = function() {
     check("list", "List is required").exists();
 
     errors = validationResult(req);
-
-    if (errors) {
-      return res.status(422).json(errors);
+        
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
     }
 
     let list;
@@ -80,8 +80,11 @@ module.exports = function() {
   };
 
   controller.leadsByList = function(res, req) {
+    console.log('leadsByList',req.params.id);
+    let lists = req.params.id.split(',');
+
     model
-      .find({ lists: { $in: [req.params.id] } })
+      .find({ lists: { $in: [lists] } })
       .populate("lists")
       .exec(function(err, leads) {
         return res.json({ data: leads });

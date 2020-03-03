@@ -27,6 +27,11 @@
               <input type="text" id="campanhaStart" v-model="email.start" />
               <label for="campanhaStart">Data de inicio</label>
             </div>
+            <div class="input-filter">
+              <select multiple class="browser-default" v-model="email.lists">
+                <option v-for="list in lists" :value="list._id">{{list.title}}</option>
+              </select>
+            </div>
             <input type="submit" value="Salvar" class="btn" />
           </form>
         </div>
@@ -38,7 +43,12 @@
 export default {
   computed: {
     email: function () {
-      return this.$store.state.email.email
+      let email = this.$store.state.email.email
+      email.lists = email.lists || []
+      return email
+    },
+    lists: function () {
+      return this.$store.state.list.lists
     }
   },
   methods: {
@@ -50,6 +60,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('getOne', this.$route.params.id)
+    this.$store.dispatch('getAllList')
   }
 }
 </script>

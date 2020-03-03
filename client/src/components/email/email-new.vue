@@ -24,6 +24,11 @@
               <input type="text" id="campanhaStart" v-model="data.start" />
               <label for="campanhaStart">Data de inicio</label>
             </div>
+            <div class="input-filter">
+              <select multiple class="browser-default" v-model="data.lists">
+                <option v-for="list in lists" :value="list._id">{{list.title}}</option>
+              </select>
+            </div>
             <input type="submit" value="Salvar" class="btn" />
           </form>
         </div>
@@ -35,7 +40,14 @@
 export default {
   data: function () {
     return {
-      data: {}
+      data: {
+        lists: []
+      }
+    }
+  },
+  computed: {
+    lists: function () {
+      return this.$store.state.list.lists
     }
   },
   methods: {
@@ -44,6 +56,9 @@ export default {
         this.$router.push('/email')
       })
     }
+  },
+  mounted () {
+    this.$store.dispatch('getAllList')
   }
 }
 </script>
