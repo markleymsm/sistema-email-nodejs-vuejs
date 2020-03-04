@@ -7,7 +7,7 @@ const Campaign = mongoose.Schema({
   status: String,
   start: { type: Date, required: true },
   opens: { type: Number, default: 0 },
-  click: { type: Number, default: 0 },
+  clicks: { type: Number, default: 0 },
   unsubscribe: { type: Number, default: 0 },
   bounce: { type: Number, default: 0 },
   lists: [

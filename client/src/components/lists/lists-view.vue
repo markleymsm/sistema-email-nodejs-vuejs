@@ -25,7 +25,7 @@
                   </div>
                 </td>
                 <td>
-                  <a :href="'#/leads/' + lead._id" class="btn"></a>
+                  <a :href="'#/leads/' + lead._id" class="btn">ver</a>
                 </td>
               </tr>
             </tbody>

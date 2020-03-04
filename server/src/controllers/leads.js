@@ -80,7 +80,8 @@ module.exports = function() {
   };
 
   controller.leadsByList = function(res, req) {
-    console.log('leadsByList',req.params.id);
+    console.log('req.params',req);
+
     let lists = req.params.id.split(',');
 
     model
