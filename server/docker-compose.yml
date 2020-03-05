@@ -17,3 +17,14 @@ services:
     ports:
       - "3000:3000"
     command: "node_modules/.bin/nodemon -L --exec npm start"
+  sendemail:
+    image: "node:10.18.0"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - "3000:3000"
+    command: "node bin/send_email.js"

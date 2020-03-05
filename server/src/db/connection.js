@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
 
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://mongo:27017/email_marketing', { useMongoClient: true }, function (err) {
 // mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true, }, function (err) {
     if (err) {

@@ -14,7 +14,7 @@ const Lead = mongoose.Schema({
     {
       campaign: {
         type: ObjectId,
-        ref: "List"
+        ref: "Campaign"
       },
       action: [
         {
