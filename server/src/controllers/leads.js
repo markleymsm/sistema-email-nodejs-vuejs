@@ -80,10 +80,7 @@ module.exports = function() {
   };
 
   controller.leadsByList = function(res, req) {
-    console.log('req.params',req);
-
     let lists = req.params.id.split(',');
-
     model
       .find({ lists: { $in: [lists] } })
       .populate("lists")
@@ -95,7 +92,7 @@ module.exports = function() {
   controller.view = function(req, res) {
     model
       .findById(req.params.id)
-      .populate("lists")
+      .populate("lists actions.campaign")
       .exec((err, result) => {
         if (err) {
           return res.status(404).json(err);

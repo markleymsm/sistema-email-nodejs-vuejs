@@ -1,5 +1,5 @@
 const connection = require('../src/db/connection');
-// const sender = require('../src/email/sender');
+const sender = require('../src/email/sender');
 const campaignModel = require('../src/models/campaign');
 const leadModel = require('../src/models/lead');
 const tracker = require('../src/email/tracker');
@@ -15,7 +15,7 @@ async function send() {
         let leads = await leadModel.find({ lists: {$in: lists}});
 
         leads.map((lead) => {
-            console.log('send lead')
+            console.log('send lead');
             let mailBody = tracker(campaigns[i].body, campaigns[i]._id, lead._id);
             console.log(lead.email, campaigns[i].title, mailBody);
             sender(lead.email, campaigns[i].title, mailBody); //envia o email
