@@ -79,15 +79,14 @@ module.exports = function() {
     });
   };
 
-  controller.leadsByList = function(res, req) {
+  controller.leadsByList = function (req, res) {
+    console.log('entra aqui');
     let lists = req.params.id.split(',');
-    model
-      .find({ lists: { $in: [lists] } })
-      .populate("lists")
-      .exec(function(err, leads) {
-        return res.json({ data: leads });
-      });
-  };
+    console.log('lists',lists);
+    model.find({ lists: { $in: lists }}).populate('lists').exec(function (err, leads) {
+      return res.json({data: leads});
+    });
+  }
 
   controller.view = function(req, res) {
     model

@@ -6,7 +6,8 @@
           <div class="card blue white-text">
             <div class="card-content">
               <span class="card-title">Total e aberturas</span>
-              <h1>{{totals[0].opens}}</h1>
+<!--              <h1>{{totals[0].opens}}</h1>-->
+              <h1>{{totals.opens}}</h1>
             </div>
           </div>
         </div>
@@ -14,7 +15,8 @@
           <div class="card blue white-text">
             <div class="card-content">
               <span class="card-title">Total de cliques</span>
-              <h1>{{totals[0].clicks}}</h1>
+<!--              <h1>{{totals[0].clicks}}</h1>-->
+              <h1>{{totals.clicks}}</h1>
             </div>
           </div>
         </div>
@@ -34,7 +36,7 @@
             </thead>
             <tbody>
             <tr v-for="campaign in campaigns">
-              <td><a :href="'#/emails/' + campaign._id">{{campaign.title}}</a></td>
+              <td><a :href="'#/emails/'+ campaign.id">{{campaign.title}}</a></td>
               <td>{{campaign.opens}}</td>
               <td>{{campaign.clicks}}</td>
             </tr>

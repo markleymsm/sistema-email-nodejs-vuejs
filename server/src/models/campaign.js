@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 let ObjectId = mongoose.Schema.ObjectId;
 
 const Campaign = mongoose.Schema({
@@ -9,10 +9,10 @@ const Campaign = mongoose.Schema({
   opens: { type: Number, default: 0 },
   clicks: { type: Number, default: 0 },
   unsubscribe: { type: Number, default: 0 },
-  bounce: { type: Number, default: 0 },
+  bounces: { type: Number, default: 0 },
   lists: [
-      { title: String, type: ObjectId, ref: "List" }
-    ]
+    {type: ObjectId, ref: 'List'}
+  ]
 });
 
-module.exports = mongoose.model("Campaign", Campaign);
+module.exports = mongoose.model('Campaign', Campaign);

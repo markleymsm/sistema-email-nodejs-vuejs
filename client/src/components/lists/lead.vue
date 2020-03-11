@@ -85,7 +85,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.dispatch('getOneLead', this.$router.params.id)
+    this.$store.dispatch('getOneLead', this.$route.params.id)
   }
 }
 </script>

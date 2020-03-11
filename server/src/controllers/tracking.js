@@ -81,14 +81,16 @@ module.exports = function () {
             lead.save();
         });
 
-        res.writeHead(302, {'Location': req.query.link});
+        res.writeHead(302, {
+            'Location': req.query.link
+        });
         res.end();
-    };
+    }
 
     let controller = {
         open: open,
         click: click
-    };
+    }
 
     return controller;
 };

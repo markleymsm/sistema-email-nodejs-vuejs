@@ -45,7 +45,7 @@
       <div class="card grey lighten-4">
         <div class="card-content">
           <span class="card-title">Campanha enviada</span>
-          <iframe :src="rendered_mail" style="width: 100%; height: 300px; border: none"></iframe>
+          <iframe :src="rendered_email" style="width: 100%; height: 300px; border: none"></iframe>
         </div>
       </div>
     </div>
@@ -80,6 +80,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -99,7 +100,9 @@ export default {
     getLeads: function () {
       if (this.email.lists) {
         let lists = this.email.lists.join(',')
-        this.$store.dispatch('getAllLeads', lists)
+        console.log('getLeads this.email', this.email)
+        console.log('getLeads lists', lists._id)
+        this.$store.dispatch('getAllLeads', this.email._id)
       } else {
         setTimeout(this.getLeads, 2000)
       }

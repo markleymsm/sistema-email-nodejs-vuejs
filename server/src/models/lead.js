@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 let ObjectId = mongoose.Schema.ObjectId;
 
 const Lead = mongoose.Schema({
@@ -9,12 +9,14 @@ const Lead = mongoose.Schema({
       value: String
     }
   ],
-  lists: [{type: ObjectId, ref: "List" }],
+  lists: [
+    {type: ObjectId, ref: 'List'}
+  ],
   actions: [
     {
       campaign: {
         type: ObjectId,
-        ref: "Campaign"
+        ref: 'Campaign',
       },
       action: [
         {
@@ -27,4 +29,4 @@ const Lead = mongoose.Schema({
   ]
 });
 
-module.exports = mongoose.model("Lead", Lead);
+module.exports = mongoose.model('Lead', Lead);

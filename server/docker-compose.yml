@@ -1,4 +1,4 @@
-version: "2"
+version: "3.1"
 services: 
   mongo:
     image: "mongo:4.2.2"
@@ -12,6 +12,7 @@ services:
     working_dir: /home/node/app
     environment:
       - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongo:27017/email_marketing
     volumes:
       - ./:/home/node/app
     ports:
@@ -21,10 +22,6 @@ services:
     image: "node:10.18.0"
     user: "node"
     working_dir: /home/node/app
-    environment:
-      - NODE_ENV=development
     volumes:
       - ./:/home/node/app
-    ports:
-      - "3000:3000"
-    command: "node bin/send_email.js"
+    command: "node bin/send_email_service.js"
