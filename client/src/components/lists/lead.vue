@@ -77,15 +77,16 @@
 
   </div>
 </template>
+
 <script>
-export default {
-  computed: {
-    lead: function () {
-      return this.$store.state.lead.lead
+  export default {
+    computed: {
+      lead: function () {
+        return this.$store.state.lead.lead
+      }
+    },
+    mounted: function () {
+      this.$store.dispatch('getOneLead', this.$route.params.id)
     }
-  },
-  mounted: function () {
-    this.$store.dispatch('getOneLead', this.$route.params.id)
   }
-}
 </script>

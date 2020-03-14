@@ -13,7 +13,6 @@ export default {
   },
   actions: {
     getAllLeads (context, id) {
-      console.log('getAllLeads', id)
       return window.axios.get('/api/leads-by-list/' + id).then((response) => {
         context.commit('updateLeads', response.data.data)
         return response

@@ -10,6 +10,7 @@ module.exports = function () {
             if (err) {
                 return err;
             }
+
             campaign.opens += 1;
             campaign.save();
         });
@@ -38,13 +39,13 @@ module.exports = function () {
         });
 
         let buf = new Buffer(35);
-        res.writeHead(200, {'Content-Type': 'image/gif'});
+        res.writeHead(200, { 'Content-Type': 'image/gif' });
         res.end(buf, 'binary');
-    };
+    }
 
     let click = function (req, res) {
         if (!req.query.link) {
-            return res.status(404).send('Not Found');
+            return res.status(404).send('Not found');
         }
 
         let campaignId = req.params.id;
@@ -54,6 +55,7 @@ module.exports = function () {
             if (err) {
                 return err;
             }
+
             campaign.clicks += 1;
             campaign.save();
         });
@@ -93,4 +95,4 @@ module.exports = function () {
     }
 
     return controller;
-};
+}

@@ -45,7 +45,7 @@
       <div class="card grey lighten-4">
         <div class="card-content">
           <span class="card-title">Campanha enviada</span>
-          <iframe :src="rendered_email" style="width: 100%; height: 300px; border: none"></iframe>
+          <iframe :src="rendered_mail" style="width: 100%; height: 300px; border: none"></iframe>
         </div>
       </div>
     </div>
@@ -83,34 +83,33 @@
 
   </div>
 </template>
+
 <script>
-export default {
-  computed: {
-    email: function () {
-      return this.$store.state.email.email
-    },
-    leads: function () {
-      return this.$store.state.lead.leads
-    },
-    rendered_email: function () {
-      return process.env.SERVER + '/campaigns/email-render/' + this.email._id
-    }
-  },
-  methods: {
-    getLeads: function () {
-      if (this.email.lists) {
-        let lists = this.email.lists.join(',')
-        console.log('getLeads this.email', this.email)
-        console.log('getLeads lists', lists._id)
-        this.$store.dispatch('getAllLeads', this.email._id)
-      } else {
-        setTimeout(this.getLeads, 2000)
+  export default {
+    computed: {
+      email: function () {
+        return this.$store.state.email.email
+      },
+      leads: function () {
+        return this.$store.state.lead.leads
+      },
+      rendered_mail: function () {
+        return process.env.SERVER + '/campaigns/email-render/' + this.email._id
       }
+    },
+    methods: {
+      getLeads: function () {
+        if (this.email.lists) {
+          let lists = this.email.lists.join(',')
+          this.$store.dispatch('getAllLeads', lists)
+        } else {
+          setTimeout(this.getLeads(), 2000)
+        }
+      }
+    },
+    mounted () {
+      this.$store.dispatch('getOne', this.$route.params.id)
+      this.getLeads()
     }
-  },
-  mounted () {
-    this.$store.dispatch('getOne', this.$route.params.id)
-    this.getLeads()
   }
-}
 </script>

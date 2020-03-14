@@ -12,7 +12,7 @@ import EmailRemove from '@/components/email/email-remove'
 
 import ListsList from '@/components/lists/lists-list'
 import ListsView from '@/components/lists/lists-view'
-import ListsLead from '@/components/lists/lead'
+import Lead from '@/components/lists/lead'
 
 Vue.use(Router)
 
@@ -22,55 +22,55 @@ let router = new Router({
       path: '/',
       name: 'Hello',
       component: Hello,
-      meta: {requiresAuth: true}
+      meta: { requiresAuth: true }
     },
     {
       path: '/email',
       name: 'EmailList',
       component: EmailList,
-      meta: {requiresAuth: true}
+      meta: { requiresAuth: true }
     },
     {
       path: '/email/new',
       name: 'EmailNew',
       component: EmailNew,
-      meta: {requiresAuth: true}
+      meta: { requiresAuth: true }
     },
     {
       path: '/emails/view/:id',
       name: 'EmailView',
       component: EmailView,
-      meta: {requiresAuth: true}
+      meta: { requiresAuth: true }
     },
     {
       path: '/emails/edit/:id',
       name: 'EmailEdit',
       component: EmailEdit,
-      meta: {requiresAuth: true}
+      meta: { requiresAuth: true }
     },
     {
       path: '/emails/remove/:id',
       name: 'EmailRemove',
       component: EmailRemove,
-      meta: {requiresAuth: true}
+      meta: { requiresAuth: true }
     },
     {
       path: '/lists',
       name: 'ListsList',
       component: ListsList,
-      meta: {requiresAuth: true}
+      meta: { requiresAuth: true }
     },
     {
       path: '/lists/:id',
       name: 'ListsView',
       component: ListsView,
-      meta: {requiresAuth: true}
+      meta: { requiresAuth: true }
     },
     {
       path: '/leads/:id',
-      name: 'ListsLead',
-      component: ListsLead,
-      meta: {requiresAuth: true}
+      name: 'Lead',
+      component: Lead,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -95,7 +95,8 @@ router.beforeEach((to, from, next) => {
     return store.dispatch('getCurrentUser')
       .then(() => {
         return next()
-      }).catch(() => {
+      })
+      .catch(() => {
         return next({path: 'login'})
       })
   }

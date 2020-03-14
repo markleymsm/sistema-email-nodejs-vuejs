@@ -1,104 +1,100 @@
-const model = require("../models/lead");
-const listModel = require("../models/list");
-const GenericController = require("./generic");
-const { check, validationResult } = require("express-validator");
+const model = require('../models/lead');
+const listModel = require('../models/list');
+const GenericController = require('./generic');
+const {check, validationResult} = require("express-validator");
 
-module.exports = function() {
-  const controller = new GenericController(model);
+module.exports = function () {
+    const controller = new GenericController(model);
 
-  controller.subscribe = async function(req, res) {
-    // req.checkBody("email", "Enter a valid email").isEmail();
-    // req.checkBody("list", "List is required").exists();
+    controller.subscribe = async function (req, res) {
+        // req.checkBody("email", "Enter a valid email").isEmail();
+        // req.checkBody("list", "List is required").exists();
 
-    // let errors = req.validationErrors();
+        // let errors = req.validationErrors();
 
-    // if (errors) {
-    // return res.status(422).json(errors);
-    // }
+        // if (errors) {
+        // return res.status(422).json(errors);
+        // }
 
-    check("email", "Enter a valid email").isEmail();
-    check("list", "List is required").exists();
+        check("email", "Enter a valid email").isEmail();
+        check("list", "List is required").exists();
 
-    errors = validationResult(req);
-        
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+        errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({errors: errors.array()});
+        }
+
+        let list;
+        await listModel.findOne(
+            {title: req.body["list"]},
+            async (err, result) => {
+                if (!result) {
+                    await listModel.create(
+                        {title: req.body["list"], quantity: 0},
+                        (err, result) => {
+                            list = result;
+                        }
+                    );
+                } else {
+                    list = result;
+                }
+            }
+        );
+
+        let register = function () {
+            let lead = {
+                email: req.body["email"],
+                lists: [list]
+            };
+
+            model.create(lead);
+
+            list.quantity++;
+            list.save();
+        };
+
+        let update = function (lead) {
+            if (lead.lists.indexOf(list._id) === -1) {
+                lead.lists.push(list._id);
+                lead.save();
+
+                list.quantity++;
+                list.save();
+            }
+        };
+
+        model.findOne({email: req.body["email"]}, function (err, lead) {
+            if (err) return res.json(err);
+
+            if (!lead) {
+                register();
+            } else {
+                update(lead);
+            }
+        });
+
+        return res.json({
+            status: "success"
+        });
+    };
+
+    controller.leadsByList = function (req, res) {
+        let lists = req.params.id.split(',');
+        model.find({lists: {$in: lists}}).populate('lists').exec(function (err, leads) {
+            return res.json({data: leads});
+        });
     }
 
-    let list;
-    await listModel.findOne(
-      { title: req.body["list"] },
-      async (err, result) => {
-        if (!result) {
-          await listModel.create(
-            { title: req.body["list"], quantity: 0 },
-            (err, result) => {
-              list = result;
+    controller.view = function (req, res) {
+        model.findById(req.params.id).populate('lists actions.campaign').exec((err, result) => {
+            if (err) {
+                return res.status(404).json(err);
             }
-          );
-        } else {
-          list = result;
-        }
-      }
-    );
+            return res.json({data: result});
+        })
+    }
 
-    let register = function() {
-      let lead = {
-        email: req.body["email"],
-        lists: [list]
-      };
+    return controller
+}
 
-      model.create(lead);
-
-      list.quantity++;
-      list.save();
-    };
-
-    let update = function(lead) {
-      if (lead.lists.indexOf(list._id) === -1) {
-        lead.lists.push(list._id);
-        lead.save();
-
-        list.quantity++;
-        list.save();
-      }
-    };
-
-    model.findOne({ email: req.body["email"] }, function(err, lead) {
-      if (err) return res.json(err);
-
-      if (!lead) {
-        register();
-      } else {
-        update(lead);
-      }
-    });
-
-    return res.json({
-      status: "success"
-    });
-  };
-
-  controller.leadsByList = function (req, res) {
-    console.log('entra aqui');
-    let lists = req.params.id.split(',');
-    console.log('lists',lists);
-    model.find({ lists: { $in: lists }}).populate('lists').exec(function (err, leads) {
-      return res.json({data: leads});
-    });
-  }
-
-  controller.view = function(req, res) {
-    model
-      .findById(req.params.id)
-      .populate("lists actions.campaign")
-      .exec((err, result) => {
-        if (err) {
-          return res.status(404).json(err);
-        }
-        return res.json({ data: result });
-      });
-  };
-
-  return controller;
-};

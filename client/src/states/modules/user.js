@@ -12,13 +12,10 @@ export default {
     updateToken (state, data) {
       state.token = data
     }
-
   },
   actions: {
     getCurrentUser (context) {
-      console.log('context', context)
       return window.axios.get('/oauth/me').then((response) => {
-        console.log('response do getCurrente', response)
         context.commit('updateUser', response.data)
         return response
       })

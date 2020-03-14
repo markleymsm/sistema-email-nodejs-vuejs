@@ -49,7 +49,7 @@ module.exports = function () {
             if (err) {
                 return res.status(404).send('not found');
             }
-            return res.render('email_render', { body: result.body })
+            return res.render('mail_render', { body: result.body })
         });
     }
 
@@ -59,7 +59,7 @@ module.exports = function () {
                 return res.status(404).send('not found');
             }
             let body = tracker(result.body, req.params.id, req.params.leadid);
-            return res.render('email_render', { body: body })
+            return res.render('mail_render', { body: body })
         });
     }
 
