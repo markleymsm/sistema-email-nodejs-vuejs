@@ -26,33 +26,26 @@ module.exports = function () {
         }
 
         let list;
-        await listModel.findOne(
-            {title: req.body["list"]},
-            async (err, result) => {
-                if (!result) {
-                    await listModel.create(
-                        {title: req.body["list"], quantity: 0},
-                        (err, result) => {
-                            list = result;
-                        }
-                    );
-                } else {
+        await listModel.findOne({ title: req.body['list'] }, async (err, result) => {
+            if (!result) {
+                await listModel.create({title: req.body['list'], quantity: 0}, (err, result) => {
                     list = result;
-                }
+                })
+            } else {
+                list = result;
             }
-        );
+        });
 
         let register = function () {
             let lead = {
-                email: req.body["email"],
-                lists: [list]
-            };
-
+                email: req.body['email'],
+                lists: [list._id]
+            }
             model.create(lead);
 
             list.quantity++;
             list.save();
-        };
+        }
 
         let update = function (lead) {
             if (lead.lists.indexOf(list._id) === -1) {
@@ -62,9 +55,9 @@ module.exports = function () {
                 list.quantity++;
                 list.save();
             }
-        };
+        }
 
-        model.findOne({email: req.body["email"]}, function (err, lead) {
+        model.findOne({email: req.body['email']}, function (err, lead) {
             if (err) return res.json(err);
 
             if (!lead) {
@@ -73,6 +66,10 @@ module.exports = function () {
                 update(lead);
             }
         });
+
+        model.findOne({ email: req.body['email'] }).populate('lists').exec(function (err, lead) {
+            console.log(lead)
+        })
 
         return res.json({
             status: "success"

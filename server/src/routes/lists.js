@@ -1,12 +1,9 @@
 module.exports = function (app) {
-    let controller = require('../controllers/leads')();
+    let controller = require('../controllers/lists')();
 
-    app.post('/leads/subscribe', controller.subscribe);
-
-    app.get('/api/leads-by-list/:id', controller.leadsByList);
-    app.get('/api/leads', controller.index);
-    app.post('/api/leads', controller.add);
-    app.get('/api/leads/:id', controller.view);
-    app.put('/api/leads/:id', controller.edit);
-    app.delete('/api/leads/:id', controller.delete);
+    app.get('/api/lists', controller.index);
+    app.post('/api/lists', controller.add);
+    app.get('/api/lists/:id', controller.view);
+    app.put('/api/lists/:id', controller.edit);
+    app.delete('/api/lists/:id', controller.delete);
 }

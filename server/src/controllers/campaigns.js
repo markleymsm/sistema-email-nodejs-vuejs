@@ -45,9 +45,10 @@ module.exports = function () {
     }
 
     controller.apiRenderEmail = (req, res) => {
+        console.log('req.params', req.params);
         model.findById(req.params.id, (err, result) => {
             if (err) {
-                return res.status(404).send('not found');
+                return res.status(404).send('not found apiRenderEmail');
             }
             return res.render('mail_render', { body: result.body })
         });
@@ -56,7 +57,7 @@ module.exports = function () {
     controller.renderEmail = (req, res) => {
         model.findById(req.params.id, (err, result) => {
             if (err) {
-                return res.status(404).send('not found');
+                return res.status(404).send('not found renderEmail');
             }
             let body = tracker(result.body, req.params.id, req.params.leadid);
             return res.render('mail_render', { body: body })
