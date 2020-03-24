@@ -100,12 +100,10 @@
     methods: {
       getLeads: function () {
         if (this.email.lists) {
-          console.log('entra aqui')
           let lists = this.email.lists.join(',')
           this.$store.dispatch('getAllLeads', lists)
         } else {
           setTimeout(this.getLeads(), 2000)
-          console.log('entra aqui22')
         }
       }
     },
